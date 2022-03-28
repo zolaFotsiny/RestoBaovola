@@ -6,10 +6,11 @@
 package Servlet;
 
 import Modele.Categorie;
-import Modele.Produit;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Tommy.Z
+ * @author Mahandry
  */
-public class ListePlat extends HttpServlet {
+public class insert extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,27 +33,12 @@ public class ListePlat extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            Produit prod = new Produit();
-            Categorie cat = new Categorie();
-            try
-            {
-                List<Produit> plats = prod.listPlat();
-                List<Categorie> categories = cat.getAllCategorie();
-                RequestDispatcher rq = request.getRequestDispatcher("list.jsp");
-                request.setAttribute("produits", plats);
-                request.setAttribute("categories", categories);
-                rq.forward(request, response);
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            
-        }
+            throws ServletException, IOException, Exception {
+        Categorie cat = new Categorie();
+        List<Categorie> categories = cat.getAllCategorie();
+        request.setAttribute("categories", categories);
+        RequestDispatcher disp=request.getRequestDispatcher("/insertProduit.jsp");
+        disp.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,7 +53,11 @@ public class ListePlat extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -81,7 +71,11 @@ public class ListePlat extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(insert.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

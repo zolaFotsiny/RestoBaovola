@@ -13,7 +13,7 @@ public class BDTable {
     {
         try{  
              Class.forName("org.postgresql.Driver");
-             return con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/resto","postgres","1234");    
+             return con=DriverManager.getConnection("jdbc:postgresql://localhost:5432/Resto","postgres","mdpprom13");    
             }
         catch(ClassNotFoundException | SQLException e){ 
         return null;

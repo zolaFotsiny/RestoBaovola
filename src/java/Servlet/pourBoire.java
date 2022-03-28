@@ -5,11 +5,8 @@
  */
 package Servlet;
 
-import Modele.Categorie;
-import Modele.Produit;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Tommy.Z
+ * @author Mahandry
  */
-public class ListePlat extends HttpServlet {
+public class pourBoire extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,22 +33,8 @@ public class ListePlat extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Produit prod = new Produit();
-            Categorie cat = new Categorie();
-            try
-            {
-                List<Produit> plats = prod.listPlat();
-                List<Categorie> categories = cat.getAllCategorie();
-                RequestDispatcher rq = request.getRequestDispatcher("list.jsp");
-                request.setAttribute("produits", plats);
-                request.setAttribute("categories", categories);
-                rq.forward(request, response);
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            
+            RequestDispatcher disp=request.getRequestDispatcher("detailsServeur.jsp");
+            disp.forward(request, response);
         }
     }
 

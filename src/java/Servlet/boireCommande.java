@@ -5,8 +5,7 @@
  */
 package Servlet;
 
-import Modele.Categorie;
-import Modele.Produit;
+import Modele.DetailsCommandeServeur;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -18,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Tommy.Z
+ * @author Mahandry
  */
-public class ListePlat extends HttpServlet {
+public class boireCommande extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,20 +35,15 @@ public class ListePlat extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Produit prod = new Produit();
-            Categorie cat = new Categorie();
-            try
-            {
-                List<Produit> plats = prod.listPlat();
-                List<Categorie> categories = cat.getAllCategorie();
-                RequestDispatcher rq = request.getRequestDispatcher("list.jsp");
-                request.setAttribute("produits", plats);
-                request.setAttribute("categories", categories);
+            int n = Integer.parseInt(request.getParameter("commande"));
+            DetailsCommandeServeur d = new DetailsCommandeServeur();
+            try{
+                List<DetailsCommandeServeur> ls = d.getPourcentage(n);
+                RequestDispatcher rq = request.getRequestDispatcher("ls.jsp");
+                request.setAttribute("ls", ls);
                 rq.forward(request, response);
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
+            }catch(Exception e){
+                
             }
             
         }

@@ -11,7 +11,7 @@ CREATE TABLE stock (
 	dateStock DATE,
 	idIngredient int,
 	quantiteInitial DECIMAL,
-	quantiteReste DECIMAL,
+	quantiteUtilisee DECIMAL,
 	prixAchat DECIMAL,
 	CONSTRAINT stock_pk PRIMARY KEY (idStock)
 ) WITH (
@@ -99,5 +99,27 @@ ALTER TABLE detailsStock ADD CONSTRAINT detailsStock_fk0 FOREIGN KEY (idStock) R
 ALTER TABLE detailsCommande ADD CONSTRAINT detailsCommande_fk0 FOREIGN KEY (idProduit) REFERENCES produit(idProduit);
 ALTER TABLE detailsCommande ADD CONSTRAINT detailsCommande_fk1 FOREIGN KEY (idCommande) REFERENCES commande(idCommande);
 
-insert into produit(nom,lastprix,idCategorie) values ('Pizza Crevette',20000,1),('Riz cantonais',13000,1),('Akondro',4000,2);
+INSERT INTO ingredient (nom) VALUES ('Farine');
+INSERT INTO ingredient (nom) VALUES ('Tomate');
+INSERT INTO ingredient (nom) VALUES ('Fromage');
+INSERT INTO ingredient (nom) VALUES ('Crevette');
+INSERT INTO ingredient (nom) VALUES ('Riz');
+INSERT INTO ingredient (nom) VALUES ('Carotte');
+INSERT INTO ingredient (nom) VALUES ('Haricot Vert');
+
+insert into produit(nom,lastprix,idCategorie) values ('Pizza Crevette',20000,1),('Riz cantonais',13000,1));
+
+INSERT INTO detailsProduit(idProduit,idIngredient,quantite) VALUES (1,1,100);
+INSERT INTO detailsProduit(idProduit,idIngredient,quantite) VALUES (1,2,50);
+INSERT INTO detailsProduit(idProduit,idIngredient,quantite) VALUES (1,3,150);
+INSERT INTO detailsProduit(idProduit,idIngredient,quantite) VALUES (1,4,200);
+
+INSERT INTO detailsProduit(idProduit,idIngredient,quantite) VALUES (2,5,150);
+INSERT INTO detailsProduit(idProduit,idIngredient,quantite) VALUES (2,6,20);
+INSERT INTO detailsProduit(idProduit,idIngredient,quantite) VALUES (2,7,20);
+
+CREATE VIEW view_produit_ingredient AS SELECT p.idProduit,idCategorie,lastprix,idDetailsProduit,idIngredient,quantite FROM produit  p JOIN detailsProduit dp ON p.idProduit=dp.idProduit;
+
+INSERT INTO stock(idIngredient,) VALUES ();
+
 insert into categorie(nom) values ('Plat'),('Dessert');

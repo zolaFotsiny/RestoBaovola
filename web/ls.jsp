@@ -3,12 +3,11 @@
     Created on : 1 mars 2022, 14:42:30
     Author     : zola
 --%>
-<%@page import="Modele.Produit"%>
-<%@page import="Modele.Categorie"%>
+<%@page import="Modele.DetailsCommandeServeur"%>
+<%@page import="Modele.DetailsCommandeView"%>
 <%@page import="java.util.List"%>
 <%
-    List <Produit> produits=(List<Produit>)request.getAttribute("produits");
-    List <Categorie> categories=(List<Categorie>)request.getAttribute("categories");
+    List<DetailsCommandeServeur>  produits=(List<DetailsCommandeServeur>)request.getAttribute("ls");
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -55,38 +54,21 @@
     <body>
        
         <div>
-            <h1>Listes des plats</h1>
-            <form name="form1" method="post" action="RecherchePlat">
- 
-             <p>Categorie :<br>
-                <select name="idCategorie">
-                    <%for(int i=0;i<categories.size();i++){ %>
-                    <option value="<%= categories.get(i).getIdCategorie()%>"><%= categories.get(i).getNom()%></option>
-                    <%}%>
-                </select>
-                 <input type="submit"  class="bouton2" style="border-style:none" rows="5" value="Trouver">
-             </p>
-            </form>
-                <a href ="insert">Inserer un produit</a>
+            <h1>Listes des pour boires</h1>
                    <table class="styled-table">
                        <thead>
                            <tr>
-                                 <th> Nom </th>
-                                 <th> Prix </th>
-                                 <th> Details Produit </th>
+                                 <th> Serveur </th>
+                                 <th> Pourboir </th>
                            </tr>
                        </thead>
                        <tbody>
                             <%for(int i=0;i<produits.size();i++){ %>
                            <tr> 
-                               <td><%= produits.get(i).getNom()%></td>
-                               <td><%= produits.get(i).getLastprix()%> Ar</td>
-                               <td>
-                                    <form name="form1" method="post" action="${pageContext.request.contextPath}/Details">
-                                      <input type="hidden" name="idProduit" value="<%= produits.get(i).getIdProduit()%>">
-                                       <input  type="submit" class="bouton2"  name="Submit" rows="5" value="Details">
-                                   </form>
-                               </td>
+                             
+                               <td>Serveur  <%= produits.get(i).getPourBoire()%> </td>
+                                 <td><%= produits.get(i).getIdServeur()%> Ariary</td>
+                               
                            </tr>
                             <% } %>
                        </tbody>

@@ -67,11 +67,13 @@
                  <input type="submit"  class="bouton2" style="border-style:none" rows="5" value="Trouver">
              </p>
             </form>
+                <a href ="insert">Inserer un produit</a>
                    <table class="styled-table">
                        <thead>
                            <tr>
                                  <th> Nom </th>
                                  <th> Prix </th>
+                                 <th> Details Produit </th>
                            </tr>
                        </thead>
                        <tbody>
@@ -79,6 +81,12 @@
                            <tr> 
                                <td><%= produits.get(i).getNom()%></td>
                                <td><%= produits.get(i).getLastprix()%> Ar</td>
+                               <td>
+                                    <form name="form1" method="post" action="${pageContext.request.contextPath}/Details">
+                                      <input type="hidden" name="idProduit" value="<%= produits.get(i).getIdProduit()%>">
+                                       <input  type="submit" class="bouton2"  name="Submit" rows="5" value="Details">
+                                   </form>
+                               </td>
                            </tr>
                             <% } %>
                        </tbody>

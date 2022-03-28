@@ -8,6 +8,38 @@
         <servlet-name>RecherchePlat</servlet-name>
         <servlet-class>Servlet.RecherchePlat</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Details</servlet-name>
+        <servlet-class>Servlet.Details</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AjouterProduit</servlet-name>
+        <servlet-class>Servlet.AjouterProduit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>insert</servlet-name>
+        <servlet-class>Servlet.insert</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailsCommande</servlet-name>
+        <servlet-class>Servlet.DetailsCommande</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>pourBoire</servlet-name>
+        <servlet-class>Servlet.pourBoire</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>findPourBoire</servlet-name>
+        <servlet-class>Servlet.findPourBoire</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PourBoireCommande</servlet-name>
+        <servlet-class>Servlet.PourBoireCommande</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>boireCommande</servlet-name>
+        <servlet-class>Servlet.boireCommande</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListePlat</servlet-name>
         <url-pattern>/ListePlat</url-pattern>
@@ -15,6 +47,38 @@
     <servlet-mapping>
         <servlet-name>RecherchePlat</servlet-name>
         <url-pattern>/RecherchePlat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Details</servlet-name>
+        <url-pattern>/Details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AjouterProduit</servlet-name>
+        <url-pattern>/AjouterProduit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insert</servlet-name>
+        <url-pattern>/insert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailsCommande</servlet-name>
+        <url-pattern>/DetailsCommande</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pourBoire</servlet-name>
+        <url-pattern>/pourBoire</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>findPourBoire</servlet-name>
+        <url-pattern>/findPourBoire</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PourBoireCommande</servlet-name>
+        <url-pattern>/PourBoireCommande</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>boireCommande</servlet-name>
+        <url-pattern>/boireCommande</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

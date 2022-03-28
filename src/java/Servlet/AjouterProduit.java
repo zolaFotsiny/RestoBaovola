@@ -9,6 +9,8 @@ import Modele.Categorie;
 import Modele.Produit;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Tommy.Z
+ * @author Mahandry
  */
-public class ListePlat extends HttpServlet {
+public class AjouterProduit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,23 +37,17 @@ public class ListePlat extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            Produit prod = new Produit();
-            Categorie cat = new Categorie();
-            try
-            {
-                List<Produit> plats = prod.listPlat();
-                List<Categorie> categories = cat.getAllCategorie();
-                RequestDispatcher rq = request.getRequestDispatcher("list.jsp");
-                request.setAttribute("produits", plats);
-                request.setAttribute("categories", categories);
-                rq.forward(request, response);
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            
+            Produit p= new Produit();
+            String nom=request.getParameter("nom");
+            int idCat=parseInt(request.getParameter("idCat"));
+            String photo=request.getParameter("photo");
+            double lastPrix=parseDouble(request.getParameter("lastPrix"));
+            Produit pr  =p.insert(nom, idCat, photo, lastPrix);
+            request.setAttribute("produit",pr);
+            RequestDispatcher disp=request.getRequestDispatcher("/list.jsp");
+            disp.forward(request, response);
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 

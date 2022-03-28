@@ -5,6 +5,7 @@
  */
 package Modele;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,4 +72,27 @@ public class Produit extends DB.BDTable{
         List plats = this.find(requete, this);
         return plats;
     }
+    
+    public Produit insert(String nom, int idCat, String photo, double lastP){
+        List <Produit> lp= new ArrayList<>();
+        Produit p= new Produit();
+
+        try{
+           String req="INSERT INTO produit(nom,idCategorie,photo,lastPrix) VALUES ('"+nom+"','"+idCat+"','"+photo+"','"+lastP+"')";
+           System.out.println(req);
+           this.execute(req);
+           lp=p.find("SELECT * FROM produit where idProduit = (select Max (idProduit) from produit)",p);
+           return lp.get(0);
+        }catch(Exception e){
+           System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    
+    
+    public static void main(String[] args){
+        Produit p = new Produit();
+        p.insert("Njuuuuuuuuuu", 2,"Huhuhu.jpg",25000.0);
+    }
+
 }

@@ -5,8 +5,8 @@
  */
 package Servlet;
 
-import Modele.Categorie;
-import Modele.Produit;
+import Modele.DetailsProduits;
+import Modele.ViewPrixRevient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Tommy.Z
+ * @author Mahandry
  */
-public class ListePlat extends HttpServlet {
+public class Details extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,22 +36,7 @@ public class ListePlat extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Produit prod = new Produit();
-            Categorie cat = new Categorie();
-            try
-            {
-                List<Produit> plats = prod.listPlat();
-                List<Categorie> categories = cat.getAllCategorie();
-                RequestDispatcher rq = request.getRequestDispatcher("list.jsp");
-                request.setAttribute("produits", plats);
-                request.setAttribute("categories", categories);
-                rq.forward(request, response);
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            
+          
         }
     }
 
@@ -81,7 +66,26 @@ public class ListePlat extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
+         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            DetailsProduits prod = new DetailsProduits();
+            ViewPrixRevient pr = new ViewPrixRevient();
+            
+            int idProduit = Integer.parseInt(request.getParameter("idProduit"));
+            try{
+                List<DetailsProduits> ls = prod.detailProduits(idProduit);
+                List<ViewPrixRevient> prix = pr.totalPrixRevient(idProduit);
+                request.setAttribute("prixRevient",prix);
+                request.setAttribute("detailsProduits", ls);
+                RequestDispatcher rq = request.getRequestDispatcher("details.jsp");
+                rq.forward(request, response);
+                
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+                
+        }
     }
 
     /**
