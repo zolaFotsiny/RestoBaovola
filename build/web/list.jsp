@@ -74,6 +74,7 @@
                                  <th> Nom </th>
                                  <th> Prix </th>
                                  <th> Details Produit </th>
+                                 <th> Ajout detail commande </th>
                            </tr>
                        </thead>
                        <tbody>
@@ -84,7 +85,14 @@
                                <td>
                                     <form name="form1" method="post" action="${pageContext.request.contextPath}/Details">
                                       <input type="hidden" name="idProduit" value="<%= produits.get(i).getIdProduit()%>">
-                                       <input  type="submit" class="bouton2"  name="Submit" rows="5" value="Details">
+                                      <input  type="submit" class="bouton2"  name="Submit" rows="5" value="Details">
+                                   </form>
+                               </td>
+                               <td>
+                                   <form action="insertDetailsCommande">
+                                       <input type="hidden" name="idProduit" value="<%= produits.get(i).getIdProduit()%>">
+                                        <input  type="text" name="quantite" placeholder="quantite">
+                                        <input  type="submit" class="bouton2"  name="Submit" rows="5" value="Ajouter">
                                    </form>
                                </td>
                            </tr>

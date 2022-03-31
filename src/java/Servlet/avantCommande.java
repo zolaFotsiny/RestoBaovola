@@ -5,25 +5,21 @@
  */
 package Servlet;
 
-import Modele.Categorie;
-import Modele.ListeDetailsCommande;
-import Modele.Produit;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import Modele.Tabla;
 
 /**
  *
  * @author Tommy.Z
  */
-public class ListePlat extends HttpServlet {
+public class avantCommande extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,35 +35,18 @@ public class ListePlat extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Produit prod = new Produit();
-            Categorie cat = new Categorie();
-            HttpSession session = request.getSession();
-            
-            ListeDetailsCommande details = new ListeDetailsCommande();
             try
             {
-                List<Produit> plats = prod.listPlat();
-                List<Categorie> categories = cat.getAllCategorie();
-                
-                List<ListeDetailsCommande> listeDetails = (List)new ArrayList();
-                if(session.getAttribute("commande")!=null){
-                    String idCommande = (String) session.getAttribute("commande");
-                    System.out.println(idCommande);
-                    listeDetails = details.getListeDetails(idCommande);
-                    System.out.println(listeDetails.size());
-                }
-                
-                RequestDispatcher rq = request.getRequestDispatcher("listeVaovao.jsp");
-                request.setAttribute("produits", plats);
-                request.setAttribute("listeDetails", listeDetails);
-                request.setAttribute("categories", categories);
+                Tabla t = new Tabla();
+                List<Tabla> tablas = t.getAllTable();
+                RequestDispatcher rq = request.getRequestDispatcher("makeCommande.jsp");
+                request.setAttribute("tablas", tablas);
                 rq.forward(request, response);
             }
             catch(Exception e)
             {
                 e.printStackTrace();
             }
-            
         }
     }
 

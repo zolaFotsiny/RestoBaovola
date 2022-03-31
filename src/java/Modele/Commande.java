@@ -47,4 +47,15 @@ public class Commande extends BDTable{
         List plats = this.find(requete, this);
         return plats;
     }
+    
+    public void generateCommande(String nomTable, String date) throws Exception{
+        String req = "insert into commande (idTable, dateCommande) values ("+nomTable+",'"+date+"')";
+        this.execute(req);
+    }
+    
+    public String maxCommande() throws Exception{
+        return this.selectString("select max(idCommande) from commande");
+    }
+    
+    
 }

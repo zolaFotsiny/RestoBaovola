@@ -61,7 +61,6 @@ CREATE TABLE detailsStock (
 CREATE TABLE commande (
 	idCommande serial,
 	dateCommande DATE,
-	idServeur int,
 	PRIMARY KEY (idCommande)
 );
 
@@ -93,7 +92,41 @@ CREATE TABLE serveur(
 );
 
 
+CREATE TABLE marge(
+	id SERIAL,
+	idProduit INT,
+	M1 DECIMAL,
+	M2 DECIMAL,
+	PRIMARY KEY(id),
+	FOREIGN KEY (idProduit) REFERENCES produit(idProduit)
+);
 
+CREATE TABLE detailsMarge(
+	id SERIAL,
+	idMarge INT,
+	caracteristique VARCHAR(20),
+	pourcentage DECIMAL,
+	FOREIGN KEY (idMarge) REFERENCES marge(id)
+);
+
+CREATE TABLE tabla(
+	id SERIAL ,
+	nom VARCHAR(50),
+	statut INT,
+	PRIMARY KEY(id)
+
+);
+
+INSERT INTO tabla(nom,statut) values ('Table1',0);
+INSERT INTO tabla(nom,statut) values ('Table2',1);
+
+create view listeCommande as(
+	select commande.idCommande,commande.dateCommande,commande.idTable,SUM(detailsCommande.quantite*produit.lastprix) as  addition
+	from commande 
+	join detailsCommande on commande.idCommande = detailsCommande.idCommande
+	join produit on detailsCommande.idProduit = produit.idProduit
+	group by commande.idCommande, commande.idProduit
+);
 
 create  view detailsCommandeView as (
 	select serveur.pourBoire,produit.idProduit,commande.idCommande,detailsCommande.quantite,commande.idServeur,produit.lastprix,commande.dateCommande
@@ -109,10 +142,11 @@ create  view detailsCommandeServeur as (
 	join produit on detailsCommande.idProduit = produit.idProduit
 	join serveur on detailsCommande.idServeur = serveur.idServeur
 );
-
+ALTER TABLE commande ADD idTable INT;
 ALTER TABLE detailsCommande ADD idServeur INT;
 
 ALTER TABLE stock ADD CONSTRAINT stock_fk0 FOREIGN KEY (idIngredient) REFERENCES ingredient(idIngredient);
+
 
 ALTER TABLE produit ADD CONSTRAINT produit_fk0 FOREIGN KEY (idCategorie) REFERENCES categorie(idCategorie);
 
@@ -174,22 +208,7 @@ INSERT INTO stock(idIngredient,quantiteInitial,quantiteUtilisee,dateStock,prixAc
 insert into categorie(nom) values ('Plat'),('Dessert');
 
 
-CREATE TABLE marge(
-	id SERIAL,
-	idProduit INT,
-	M1 DECIMAL,
-	M2 DECIMAL,
-	PRIMARY KEY(id),
-	FOREIGN KEY (idProduit) REFERENCES produit(idProduit)
-);
 
-CREATE TABLE detailsMarge(
-	id SERIAL,
-	idMarge INT,
-	caracteristique VARCHAR(20),
-	pourcentage DECIMAL,
-	FOREIGN KEY (idMarge) REFERENCES marge(id)
-);
 
 
 insert into commande(dateCommande) values ('2022-05-14');

@@ -31,7 +31,7 @@ public class DetailsCommandeServeur extends BDTable{
     public void setPourBoire(double pourBoire) {
         this.pourBoire = pourBoire;
     }
-        public List<DetailsCommandeServeur> getPourcentage(int idCommande) throws Exception{
+    public List<DetailsCommandeServeur> getPourcentage(int idCommande) throws Exception{
         String req = "SELECT sum(quantite*lastPrix*pourBoire)  pourBoire,idServeur from detailsCommandeServeur  where idCommande =  '"+idCommande+"' group by idServeur";
         System.out.println(req);
         List plats = this.find(req, this);

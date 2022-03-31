@@ -5,13 +5,9 @@
  */
 package Servlet;
 
-import Modele.Categorie;
-import Modele.ListeDetailsCommande;
-import Modele.Produit;
+import Modele.DetailsCommande;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +17,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Tommy.Z
+ * @author Mahandry
  */
-public class ListePlat extends HttpServlet {
+public class insertDetailsCommande extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,36 +34,23 @@ public class ListePlat extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            Produit prod = new Produit();
-            Categorie cat = new Categorie();
-            HttpSession session = request.getSession();
-            
-            ListeDetailsCommande details = new ListeDetailsCommande();
-            try
-            {
-                List<Produit> plats = prod.listPlat();
-                List<Categorie> categories = cat.getAllCategorie();
+            DetailsCommande dc = new DetailsCommande();
+            String idProduit = request.getParameter("idProduit");
+            HttpSession h = request.getSession();
+            String idCommande = (String)h.getAttribute("commande");
+            String quantite = request.getParameter("quantite");
+            try{
                 
-                List<ListeDetailsCommande> listeDetails = (List)new ArrayList();
-                if(session.getAttribute("commande")!=null){
-                    String idCommande = (String) session.getAttribute("commande");
-                    System.out.println(idCommande);
-                    listeDetails = details.getListeDetails(idCommande);
-                    System.out.println(listeDetails.size());
+                for(int i =0;i<Integer.parseInt(quantite);i++){
+                    dc.insererDetailsCommande(idProduit, idCommande);
                 }
+                RequestDispatcher disp=request.getRequestDispatcher("ListePlat");
+                disp.forward(request, response);
                 
-                RequestDispatcher rq = request.getRequestDispatcher("listeVaovao.jsp");
-                request.setAttribute("produits", plats);
-                request.setAttribute("listeDetails", listeDetails);
-                request.setAttribute("categories", categories);
-                rq.forward(request, response);
+                
+            }catch(Exception e){
+                
             }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            
         }
     }
 

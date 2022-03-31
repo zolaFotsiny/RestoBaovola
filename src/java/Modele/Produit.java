@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Tommy.Z
+ * @author Mahandry
  */
 public class Produit extends DB.BDTable{
     int idProduit;
@@ -88,11 +88,4 @@ public class Produit extends DB.BDTable{
         }
         return null;
     }
-    
-    
-    public static void main(String[] args){
-        Produit p = new Produit();
-        p.insert("Njuuuuuuuuuu", 2,"Huhuhu.jpg",25000.0);
-    }
-
 }

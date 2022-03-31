@@ -5,13 +5,9 @@
  */
 package Servlet;
 
-import Modele.Categorie;
-import Modele.ListeDetailsCommande;
-import Modele.Produit;
+import Modele.Commande;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Tommy.Z
  */
-public class ListePlat extends HttpServlet {
+public class generateCommande extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,29 +35,21 @@ public class ListePlat extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Produit prod = new Produit();
-            Categorie cat = new Categorie();
-            HttpSession session = request.getSession();
-            
-            ListeDetailsCommande details = new ListeDetailsCommande();
+            String table = request.getParameter("table");
+            String date = request.getParameter("daty");
+            Commande com = new Commande();
             try
             {
-                List<Produit> plats = prod.listPlat();
-                List<Categorie> categories = cat.getAllCategorie();
+                com.generateCommande(table, date);
+                System.out.println("Commande inserer");
                 
-                List<ListeDetailsCommande> listeDetails = (List)new ArrayList();
-                if(session.getAttribute("commande")!=null){
-                    String idCommande = (String) session.getAttribute("commande");
-                    System.out.println(idCommande);
-                    listeDetails = details.getListeDetails(idCommande);
-                    System.out.println(listeDetails.size());
-                }
                 
-                RequestDispatcher rq = request.getRequestDispatcher("listeVaovao.jsp");
-                request.setAttribute("produits", plats);
-                request.setAttribute("listeDetails", listeDetails);
-                request.setAttribute("categories", categories);
-                rq.forward(request, response);
+                String maxCommande = com.maxCommande();
+                HttpSession sess = request.getSession();
+                sess.setAttribute("commande", maxCommande);
+                System.out.println("Session : "+sess.getAttribute("commande"));
+                RequestDispatcher dispat = request.getRequestDispatcher("ListePlat");
+                dispat.forward(request, response);
             }
             catch(Exception e)
             {

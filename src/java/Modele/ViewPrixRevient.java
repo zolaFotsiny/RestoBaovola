@@ -82,12 +82,6 @@ public class ViewPrixRevient extends BDTable{
         List plats = this.find(req, this);
         return plats;
     }
-    
-     public static void main(String[] args) throws Exception{
-       ViewPrixRevient d = new ViewPrixRevient();
-       List <ViewPrixRevient> list = d.totalPrixRevient(1);
-       System.out.println(list);
-    }
 }
 
 

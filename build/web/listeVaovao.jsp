@@ -3,12 +3,14 @@
     Created on : 1 mars 2022, 14:42:30
     Author     : zola
 --%>
+<%@page import="Modele.ListeDetailsCommande"%>
 <%@page import="Modele.Produit"%>
 <%@page import="Modele.Categorie"%>
 <%@page import="java.util.List"%>
 <%
     List <Produit> produits=(List<Produit>)request.getAttribute("produits");
     List <Categorie> categories=(List<Categorie>)request.getAttribute("categories");
+    List<ListeDetailsCommande> listeDetails = (List<ListeDetailsCommande>)request.getAttribute("listeDetails");
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -99,6 +101,27 @@
                             <% } %>
                        </tbody>
                     </table>
+                       
+                       <h2>Liste details commande</h2>
+                       <table class="styled-table">
+                       <thead>
+                           <tr>
+                                 <th> Nom </th>
+                                 <th> Prix </th>
+                                 <th> Quantite </th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                            <%for(int i=0;i<listeDetails.size();i++){ %>
+                           <tr> 
+                               <td><%= listeDetails.get(i).getNom()%></td>
+                               <td><%= listeDetails.get(i).getLastprix()%> Ar</td>
+                               <td><%= listeDetails.get(i).getQuantite()%> </td>
+                           </tr>
+                            <% } %>
+                       </tbody>
+                    </table>
+                       
         </div> 
     </body>
 </html>

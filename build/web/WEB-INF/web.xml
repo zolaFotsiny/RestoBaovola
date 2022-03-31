@@ -21,10 +21,6 @@
         <servlet-class>Servlet.insert</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DetailsCommande</servlet-name>
-        <servlet-class>Servlet.DetailsCommande</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>pourBoire</servlet-name>
         <servlet-class>Servlet.pourBoire</servlet-class>
     </servlet>
@@ -39,6 +35,18 @@
     <servlet>
         <servlet-name>boireCommande</servlet-name>
         <servlet-class>Servlet.boireCommande</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>avantCommande</servlet-name>
+        <servlet-class>Servlet.avantCommande</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>generateCommande</servlet-name>
+        <servlet-class>Servlet.generateCommande</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>insertDetailsCommande</servlet-name>
+        <servlet-class>Servlet.insertDetailsCommande</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListePlat</servlet-name>
@@ -61,10 +69,6 @@
         <url-pattern>/insert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DetailsCommande</servlet-name>
-        <url-pattern>/DetailsCommande</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>pourBoire</servlet-name>
         <url-pattern>/pourBoire</url-pattern>
     </servlet-mapping>
@@ -79,6 +83,18 @@
     <servlet-mapping>
         <servlet-name>boireCommande</servlet-name>
         <url-pattern>/boireCommande</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>avantCommande</servlet-name>
+        <url-pattern>/avantCommande</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>generateCommande</servlet-name>
+        <url-pattern>/generateCommande</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insertDetailsCommande</servlet-name>
+        <url-pattern>/insertDetailsCommande</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
