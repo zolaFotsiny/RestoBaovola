@@ -128,6 +128,13 @@ create view listeCommande as(
 	group by commande.idCommande, commande.idProduit
 );
 
+CREATE VIEW listeDetailsCommande AS 
+select commande.idCommande,commande.dateCommande,commande.idTable,produit.nom,produit.lastprix,SUM(detailsCommande.quantite) as  quantite
+	from commande 
+	join detailsCommande on commande.idCommande = detailsCommande.idCommande
+	join produit on detailsCommande.idProduit = produit.idProduit
+	group by commande.idCommande, produit.idProduit;
+
 create  view detailsCommandeView as (
 	select serveur.pourBoire,produit.idProduit,commande.idCommande,detailsCommande.quantite,commande.idServeur,produit.lastprix,commande.dateCommande
 	from commande 
